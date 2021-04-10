@@ -28,6 +28,7 @@ public class GUI extends JFrame implements ActionListener {
     JPanel rightPanel = new JPanel();
     JPanel methodToolbar = new JPanel();
     JToolBar header = new JToolBar(); // top toolbar showing current open class
+    JToolBar tb = new JToolBar();
     // layouts
     BorderLayout borderLayout1 = new BorderLayout();
     BorderLayout borderLayout2 = new BorderLayout();
@@ -42,7 +43,10 @@ public class GUI extends JFrame implements ActionListener {
     JLabel mtdLabel = new JLabel();
 
     JLabel classLabel = new JLabel();
-    //JTextField testClass = new JTextField();
+    JList runCount = new JList();
+    JViewport view = new JViewport();
+
+    JLabel tb1 = new JLabel();
 
     /**
      * Create GUI window and all components
@@ -56,6 +60,15 @@ public class GUI extends JFrame implements ActionListener {
         // Begin select class tool bar //
         this.header.add(this.classLabel, (Object)null);
         this.classLabel.setText(" File  Help  ");
+
+        this.tb.add(this.tb1, (Object) null);
+
+        this.methodView.setViewport(view);
+        this.methodView.setPreferredSize(new Dimension(258, 150));
+        this.methodView.getViewport().add(this.methodList, (Object)null);
+        this.methodView.setRowHeaderView(new JLabel("0"));
+        this.runCount.setLayoutOrientation(JList.VERTICAL);
+
         // Constructor left window view //
         this.leftPanel.setLayout(this.borderLayout3);
         this.leftPanel.setMinimumSize(new Dimension(220, 163));
@@ -66,8 +79,6 @@ public class GUI extends JFrame implements ActionListener {
         this.constructToolbar.add(this.construct, (Object)null);
         this.constructView.getViewport().add(this.constructList, (Object)null);
         // Right view //
-        this.methodView.setPreferredSize(new Dimension(258, 150));
-        this.methodView.getViewport().add(this.methodList, (Object)null);
         this.rightPanel.setLayout(this.borderLayout2);
         this.rightPanel.add(this.methodView, "Center");
         this.rightPanel.add(this.methodToolbar, "North");
