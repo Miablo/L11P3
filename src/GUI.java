@@ -55,7 +55,7 @@ public class GUI extends JFrame implements ActionListener {
         this.setTitle("FUNCTIONAL TESTING TOOL");
         // Begin select class tool bar //
         this.header.add(this.classLabel, (Object)null);
-        this.classLabel.setText(" File ");
+        this.classLabel.setText(" File  Help  ");
         // Constructor left window view //
         this.leftPanel.setLayout(this.borderLayout3);
         this.leftPanel.setMinimumSize(new Dimension(220, 163));
