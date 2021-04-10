@@ -2,31 +2,82 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  *
  */
 public class GUI extends JFrame implements ActionListener {
-    JPanel mainWindow = new JPanel();
+    JPanel window; // main window
+    // scroll view areas for method,construct,and console
+    JSplitPane methodPane = new JSplitPane();
+    JScrollPane methodView = new JScrollPane();
+    JScrollPane constructView = new JScrollPane();
+    // panels
+    JPanel leftPanel = new JPanel();
+    JPanel constructToolbar = new JPanel();
+    JPanel rightPanel = new JPanel();
+    JPanel methodToolbar = new JPanel();
+    JToolBar header = new JToolBar(); // top toolbar showing current open class
+    // layouts
+    BorderLayout borderLayout1 = new BorderLayout();
+    BorderLayout borderLayout2 = new BorderLayout();
+    BorderLayout borderLayout3 = new BorderLayout();
 
-    JSplitPane leftPane = new JSplitPane();
-    JScrollPane classesPane = new JScrollPane();
-    JSplitPane rightPane = new JSplitPane();
-    JScrollPane constructPane = new JScrollPane();
-    JSplitPane centerPane = new JSplitPane();
-    JSplitPane countPane = new JSplitPane();
+    JList constructList = new JList();
+    JList methodList = new JList();
 
-    JList constructList;
-    JList methodList;
+    // Object Button
+    JLabel construct = new JLabel();
+    // Method run button
+    JLabel mtdLabel = new JLabel();
 
-    JPanel constructToolbar;
+    JLabel classLabel = new JLabel();
+    //JTextField testClass = new JTextField();
 
-    JToolBar header;
+    public void createWindow() {
+        // Begin main window //
+        this.window = (JPanel)this.getContentPane();
+        this.window.setLayout(this.borderLayout1);
+        this.setSize(new Dimension(508, 513));
+        this.setTitle("FUNCTIONAL TESTING TOOL");
+        // Begin select class tool bar //
 
-    BorderLayout bl1;
-    BorderLayout bl2;
-    BorderLayout bl3;
-    BorderLayout bl4;
+        this.header.add(this.classLabel, (Object)null);
+        this.classLabel.setText(" File ");
+        // Constructor left window view //
+        this.leftPanel.setLayout(this.borderLayout3);
+        this.leftPanel.setMinimumSize(new Dimension(220, 163));
+        this.leftPanel.setPreferredSize(new Dimension(258, 163));
+        this.leftPanel.add(this.constructView, "Center");
+        this.leftPanel.add(this.constructToolbar, "North");
+
+        this.constructToolbar.add(this.construct, (Object)null);
+        this.constructView.getViewport().add(this.constructList, (Object)null);
+        // Right Method run view //
+        this.methodView.setPreferredSize(new Dimension(258, 150));
+        this.methodView.getViewport().add(this.methodList, (Object)null);
+        this.rightPanel.setLayout(this.borderLayout2);
+        this.rightPanel.add(this.methodView, "Center");
+        this.rightPanel.add(this.methodToolbar, "North");
+        // Method Button and label
+        this.mtdLabel.setRequestFocusEnabled(true);
+        this.mtdLabel.setText("Methods & Constructors");
+        this.construct.setText("Found Classes");
+        // run clicked call run method
+
+        // add button and label to panel
+        this.methodToolbar.add(this.mtdLabel, (Object)null);
+        this.methodPane.add(this.leftPanel, "left");
+        this.methodPane.add(this.rightPanel, "right");
+        // add views to window //
+        this.window.add(this.methodPane, "Center");
+        this.window.add(this.header, "North");
+
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
 
     /*
     The GUI contains a split pane, as shown below. The left hand side of the split pane displays all of the found classes.
@@ -34,27 +85,6 @@ public class GUI extends JFrame implements ActionListener {
     Feel free to take advantage of your previously developed javap-alike (skeleton) tool to facilitate this task.
      */
 
-    public void createWindow() {
-        // create window
-        this.mainWindow = (JPanel)this.getContentPane();
-        this.mainWindow.setLayout(this.bl1);
-        this.setSize(new Dimension(508, 513));
-        this.setTitle("Test Tool");
-        // create toolbar
-        // file, help
-        // create second toolbar
-        // left scroll panel
-        this.leftPane.setLayout(bl2);
-        this.rightPane.setLayout(bl3);
-        this.mainWindow.add(this.leftPane, "left");
-        this.mainWindow.add(this.rightPane, "right");
-        this.mainWindow.add(this.centerPane, "center");
-
-        // middle scroll panel
-        // right scroll panel
-
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
