@@ -2,16 +2,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
+ *
+ *
+ * @author Mio,
+ * @version 1.0
+ *
+ * @see java.awt.event.ActionListener
+ * @see java.awt.event.ActionEvent
+ * @see java.awt
+ * @see javax.swing
+ *
  *
  */
 public class GUI extends JFrame implements ActionListener {
     JPanel window; // main window
-    // scroll view areas for method,construct,and console
+    // scroll view areas for method,construct,
     JSplitPane methodPane = new JSplitPane();
     JScrollPane methodView = new JScrollPane();
     JScrollPane constructView = new JScrollPane();
@@ -37,6 +44,9 @@ public class GUI extends JFrame implements ActionListener {
     JLabel classLabel = new JLabel();
     //JTextField testClass = new JTextField();
 
+    /**
+     * Create GUI window and all components
+     */
     public void createWindow() {
         // Begin main window //
         this.window = (JPanel)this.getContentPane();
@@ -44,7 +54,6 @@ public class GUI extends JFrame implements ActionListener {
         this.setSize(new Dimension(508, 513));
         this.setTitle("FUNCTIONAL TESTING TOOL");
         // Begin select class tool bar //
-
         this.header.add(this.classLabel, (Object)null);
         this.classLabel.setText(" File ");
         // Constructor left window view //
@@ -56,7 +65,7 @@ public class GUI extends JFrame implements ActionListener {
 
         this.constructToolbar.add(this.construct, (Object)null);
         this.constructView.getViewport().add(this.constructList, (Object)null);
-        // Right Method run view //
+        // Right view //
         this.methodView.setPreferredSize(new Dimension(258, 150));
         this.methodView.getViewport().add(this.methodList, (Object)null);
         this.rightPanel.setLayout(this.borderLayout2);
