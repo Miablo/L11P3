@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 /**
  *
+ * GUI contains a split pane
+ * left hand side of the split pane displays all of the found classes
+ * right hand side shows the declared methods and constructors of a user selected class in the list
  *
  * @author Mio, Cody
  * @version 1.0
@@ -13,7 +16,6 @@ import java.awt.event.ActionListener;
  * @see java.awt.event.ActionEvent
  * @see java.awt
  * @see javax.swing
- *
  *
  */
 public class GUI extends JFrame implements ActionListener {
@@ -28,25 +30,23 @@ public class GUI extends JFrame implements ActionListener {
     JPanel rightPanel = new JPanel();
     JPanel methodToolbar = new JPanel();
     JToolBar header = new JToolBar(); // top toolbar showing current open class
-    JToolBar tb = new JToolBar();
     // layouts
     BorderLayout borderLayout1 = new BorderLayout();
     BorderLayout borderLayout2 = new BorderLayout();
     BorderLayout borderLayout3 = new BorderLayout();
-
+    // list views
     JList constructList = new JList();
     JList methodList = new JList();
+    JList runCount = new JList();
 
+    JScrollBar rightBar = new JScrollBar();
     // Object Button
     JLabel construct = new JLabel();
     // Method run button
     JLabel mtdLabel = new JLabel();
 
     JLabel classLabel = new JLabel();
-    JList runCount = new JList();
     JViewport view = new JViewport();
-
-    JLabel tb1 = new JLabel();
 
     /**
      * Create GUI window and all components
@@ -56,24 +56,25 @@ public class GUI extends JFrame implements ActionListener {
         this.window = (JPanel)this.getContentPane();
         this.window.setLayout(this.borderLayout1);
         this.setSize(new Dimension(508, 513));
-        this.setTitle("FUNCTIONAL TESTING TOOL");
+        this.setTitle("Lab 11 Q3 Testing Tool GUI ");
         // Begin select class tool bar //
         this.header.add(this.classLabel, (Object)null);
         this.classLabel.setText(" File  Help  ");
 
-        this.tb.add(this.tb1, (Object) null);
-
+        this.view.setViewSize(new Dimension(300, 513));
+        // begin right method and constructor view //
         this.methodView.setViewport(view);
         this.methodView.setPreferredSize(new Dimension(258, 150));
         this.methodView.getViewport().add(this.methodList, (Object)null);
+        // header
         this.methodView.setRowHeaderView(new JLabel("0"));
         this.methodView.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.runCount.setLayoutOrientation(JList.VERTICAL);
 
-        // Constructor left window view //
+        // left window view //
         this.leftPanel.setLayout(this.borderLayout3);
         this.leftPanel.setMinimumSize(new Dimension(220, 163));
-        this.leftPanel.setPreferredSize(new Dimension(258, 163));
+        this.leftPanel.setPreferredSize(new Dimension(228, 163));
         this.leftPanel.add(this.constructView, "Center");
         this.leftPanel.add(this.constructToolbar, "North");
 
@@ -87,24 +88,20 @@ public class GUI extends JFrame implements ActionListener {
         this.mtdLabel.setRequestFocusEnabled(true);
         this.mtdLabel.setText("Methods & Constructors");
         this.construct.setText("Found Classes");
-        // run clicked call run method
 
-        // add button and label to panel
         this.methodToolbar.add(this.mtdLabel, (Object)null);
         this.methodPane.add(this.leftPanel, "left");
         this.methodPane.add(this.rightPanel, "right");
+        // scroll bar //
+        methodView.setVerticalScrollBar(rightBar);
+        rightBar.setMaximum(513);
+        rightBar.setVisible(true);
         // add views to window //
         this.window.add(this.methodPane, "Center");
         this.window.add(this.header, "North");
-
+        // close window action
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-
-    /*
-    The GUI contains a split pane, as shown below. The left hand side of the split pane displays all of the found classes.
-    The right hand side shows the declared methods and constructors of a user selected class in the list.
-    Feel free to take advantage of your previously developed javap-alike (skeleton) tool to facilitate this task.
-     */
 
 
     @Override
