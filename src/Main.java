@@ -1,6 +1,6 @@
 /**
  *
- * @author Mio,
+ * @author Mio Cody
  * @version 1.0
  */
 public class Main {

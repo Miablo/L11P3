@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  *
  *
- * @author Mio,
+ * @author Mio, Cody
  * @version 1.0
  *
  * @see java.awt.event.ActionListener
