@@ -67,6 +67,7 @@ public class GUI extends JFrame implements ActionListener {
         this.methodView.setPreferredSize(new Dimension(258, 150));
         this.methodView.getViewport().add(this.methodList, (Object)null);
         this.methodView.setRowHeaderView(new JLabel("0"));
+        this.methodView.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.runCount.setLayoutOrientation(JList.VERTICAL);
 
         // Constructor left window view //
